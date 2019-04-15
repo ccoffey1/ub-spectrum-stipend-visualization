@@ -12,7 +12,7 @@ class MajorChartBuffalo extends Component {
         this.handleBarClick = this.handleBarClick.bind(this)
     }
     
-    componentDidUpdate() {
+    componentDidMount() {
          const bottom = document.getElementById("bottomboi")
          scrollToComponent(bottom, {
             offset: 1000,
@@ -32,7 +32,7 @@ class MajorChartBuffalo extends Component {
         exportEnabled: true,
         theme: "light2",
 		title:{
-			text: "TA Salary Ranges by Major (SUNY University at Buffalo)"
+			text: "TA Salary Ranges by Department (SUNY University at Buffalo)"
 		},
 		subtitles: [{
 			text: "As of April 19th, 2019"
