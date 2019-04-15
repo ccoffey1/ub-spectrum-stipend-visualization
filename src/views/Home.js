@@ -13,8 +13,7 @@ import MajorChartBuffalo from './MajorChartBuffalo';
 import MajorChartAlbany from './MajorChartAlbany';
 import MajorChartBinghamton from './MajorChartBinghamton';
 import MajorChartStonyBrook from './MajorChartStonyBrook';
-import { Slide } from '@material-ui/core';
-import scrollToComponent from 'react-scroll-to-component';
+import { Slide, AppBar, Toolbar } from '@material-ui/core';
 
 
 const styles = ({
@@ -28,16 +27,15 @@ class Home extends React.Component {
         super(props)
         this.redirect = this.redirect.bind(this)
     }
-    state = {
-        redirect: true,
-        currentSchool: null
-    }
 
     handleItemClicked = itemInfo => {
         switch(itemInfo.dataPoint.label) {
             case "University at Buffalo":
-                this.setState({ currentSchool: "ub" })
                 this.redirect("/ub")
+                break;
+
+            case "Albany":
+                this.redirect("/albany")
                 break;
 
             default:
@@ -46,12 +44,8 @@ class Home extends React.Component {
     }
     
     redirect = (site) => {
-        console.log("redirecting...")
-        if (this.state.redirect) {
-            this.props.history.push(site)
-            this.setState({ redirect: false })
-        }
-        
+        this.props.history.push(site)
+        this.setState({ redirect: false })
     }
 
   render() {
