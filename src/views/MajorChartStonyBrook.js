@@ -1,14 +1,25 @@
 import React, { Component } from "react";
 import CanvasJSReact from '../assets/canvasjs.react'
-import { Paper, Grow } from "@material-ui/core";
+import { Paper, Grow, Slide } from "@material-ui/core";
+import scrollToComponent from 'react-scroll-to-component';
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
  
-class MajorChartStonyBrook extends Component {
+class MajorChartBuffalo extends Component {
 	constructor(props) {
-		super(props)
-		this.handleBarClick = this.handleBarClick.bind(this)
-	}
+        super(props)
+        this.testing = React.createRef()
+        this.handleBarClick = this.handleBarClick.bind(this)
+    }
+    
+    componentDidMount() {
+         const bottom = document.getElementById("bottomboi")
+         scrollToComponent(bottom, {
+            offset: 1000,
+            align: 'bottom',
+            duration: 800
+        });
+    }
 
 	handleBarClick = (e) => {
 		this.props.itemClicked(e);
@@ -16,11 +27,12 @@ class MajorChartStonyBrook extends Component {
 
   render() {
 	const options = {
-		animationEnabled: true,
-		exportEnabled: true,
-		theme: "light2",
+        zoomEnabled: true,
+        animationEnabled: true,
+        exportEnabled: true,
+        theme: "light2",
 		title:{
-			text: "TA Salary Ranges by University"
+			text: "TA Salary Ranges by Department (SUNY Albany)"
 		},
 		subtitles: [{
 			text: "As of April 19th, 2019"
@@ -29,32 +41,55 @@ class MajorChartStonyBrook extends Component {
 			includeZero: false,
 			prefix: "$",
 			title: "Salary"
-		},
-		data: [{
+        },
+        toolTip: {
+            shared: true
+        },
+		data: [
+        {
 			click: this.handleBarClick,
-			type: "rangeColumn",
-			yValueFormatString: "$#,##0.00",
-			toolTipContent: "{label}<hr>High: {y[0]}<br><b>Average: {y[1]}</b><br>Low: {y[2]}",
-			dataPoints: [		
-				{ label: "University at Buffalo", y: [29288, 16173, 9960] },
-				{ label: "Stony Brook", y: [37017, 19836, 10350] },
-				{ label: "Binghamton", y: [31223, 18735, 9977] },
-				{ label: "Albany", y: [23796, 16744, 9964] },
+            type: "bar",
+            name: "Maximum",
+            showInLegend: "true",
+			yValueFormatString: "$#,##0",
+			dataPoints: [
+                { label: "Admissions", y: 12500 },
 			]
-		}]
-	}
-	
-	return (
-		<div>
-			<Grow in={true} timeout={1000}>
-				<Paper style={{padding: 20}}>
-					<CanvasJSChart options = {options} />
-				</Paper>
-				{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
-			</Grow>
-		</div>
+		},
+		{
+			click: this.handleBarClick,
+            type: "bar",
+            name: "Average",
+            showInLegend: "true",
+			yValueFormatString: "$#,##0",
+			dataPoints: [
+                { label: "Admissions", y: 12500 },
+			]
+        },
+		{
+			click: this.handleBarClick,
+            type: "bar",
+            name: "Minimum",
+            showInLegend: "true",
+			yValueFormatString: "$#,##0",
+			dataPoints: [		
+				{ label: "Admissions", y: 12500 },
+			]},
+		]
+    }
+    
+    return (
+		<div style={{marginTop: 20}}>
+        	<Grow in={true} timeout={1000}>
+                <Paper style={{padding: 20}}>
+                    <CanvasJSChart options = {options}
+                    />
+                </Paper>
+            </Grow>
+            <Slide in={true} id="bottomboi" direction="right" timeout={1000}><h4 style={{color: "#727272"}}>Click and drag to zoom.</h4></Slide>
+        </div>
 	);
   }
 }
  
-export default MajorChartStonyBrook;
+export default MajorChartBuffalo;

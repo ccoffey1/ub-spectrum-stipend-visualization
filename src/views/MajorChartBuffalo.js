@@ -47,6 +47,7 @@ class MajorChartBuffalo extends Component {
         },
 		data: [
         {
+            // TODO: Update these just incase!
 			click: this.handleBarClick,
             type: "bar",
             name: "Maximum",
