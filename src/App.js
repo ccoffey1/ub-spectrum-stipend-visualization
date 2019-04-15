@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles'
 import Home from './views/Home';
+import {
+  BrowserRouter,
+} from "react-router-dom";
 
 const theme = createMuiTheme({
   palette: {
@@ -18,7 +21,9 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider theme={theme}>
+        <BrowserRouter>
           <Home />
+        </BrowserRouter>
         </MuiThemeProvider>
       </div>
     );

@@ -1,64 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import {withRouter} from 'react-router-dom'
 import SchoolCharts from './SchoolCharts'
 
 import {
     Route,
-    NavLink,
-    BrowserRouter
+    Redirect,
+    BrowserRouter,
   } from "react-router-dom";
-import { Link } from '@material-ui/core';
+import MajorChartBuffalo from './MajorChartBuffalo';
+import MajorChartAlbany from './MajorChartAlbany';
+import MajorChartBinghamton from './MajorChartBinghamton';
+import MajorChartStonyBrook from './MajorChartStonyBrook';
+import { Slide } from '@material-ui/core';
 
-const drawerWidth = 240;
 
-const styles = theme => ({
+const styles = ({
     root: {
-        flexGrow: 1
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-    },
-    appBarShift: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    drawerHeader: {
-         display: 'flex',
-         alignItems: 'center',
-         padding: '0 8px',
-        ...theme.mixins.toolbar,
-        justifyContent: 'flex-end',
-    },
-    container: {
-        marginLeft: drawerWidth,
-        marginTop: 100,
-        padding: 30
+        padding: 50
     }
 })
 
 class Home extends React.Component {
+    constructor(props) {
+        super(props)
+        this.redirect = this.redirect.bind(this)
+    }
     state = {
+        redirect: true,
         currentSchool: null
     }
 
     handleItemClicked = itemInfo => {
-        console.log(itemInfo.dataPoint.label)
+        switch(itemInfo.dataPoint.label) {
+            case "University at Buffalo":
+                this.setState({ currentSchool: "ub" })
+                this.redirect("/ub")
+                break;
+
+            default:
+                this.setState({ currentSchool: null })
+        }
+    }
+    
+    redirect = (site) => {
+        console.log("redirecting...")
+        if (this.state.redirect) {
+            this.props.history.push(site)
+            this.setState({ redirect: false })
+        }
+        
     }
 
   render() {
@@ -66,36 +58,14 @@ class Home extends React.Component {
 
     return (
       <div className={classes.root}>
-        <BrowserRouter>
-            <AppBar className={classes.appBar} position="absolute">
-                <Toolbar>
-                    <Typography variant="h6" color="inherit">
-                        TA Salaries
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer 
-                className={classes.drawer}
-                variant="persistent"
-                anchor="left"
-                open={true}
-                classes={{
-                    paper: classes.drawerPaper
-                }}
-            >
-                <div className={classes.drawerHeader} />
-                    <List>
-                        <ListItem button component={NavLink} to="/by-university">
-                            <ListItemText primary={[<i style={{marginRight: 10}} class="fas fa-university"></i>, "By University"]} />
-                        </ListItem>
-                        <Divider />
-                    </List>
-
-            </Drawer>
-            <div className={classes.container}>
-                <Route path="/by-university" render={() => <SchoolCharts itemClicked={this.handleItemClicked}/>}/>
-            </div>
-        </BrowserRouter>
+        <div>
+            <SchoolCharts itemClicked={this.handleItemClicked}/>
+            <Route path="/" exact specific render={() => <Slide in={true} direction="right" timeout={1000}><h4 style={{color: "#727272"}}>Select a bar in the chart above for information by position.</h4></Slide>}/>
+            <Route path="/ub" exact render={() => <MajorChartBuffalo itemClicked={this.handleItemClicked}/>}/>
+            <Route path="/albany" render={() => <MajorChartAlbany itemClicked={this.handleItemClicked}/>}/>
+            <Route path="/binghamton" render={() => <MajorChartBinghamton itemClicked={this.handleItemClicked}/>}/>
+            <Route path="/stonybrook" render={() => <MajorChartStonyBrook itemClicked={this.handleItemClicked}/>}/>
+        </div>
       </div>
     )
   }
@@ -106,4 +76,4 @@ Home.propTypes = {
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Home)
+export default withRouter(withStyles(styles)(Home))
