@@ -48,7 +48,7 @@ class MajorChartBuffalo extends Component {
 		data: [
         {
 			click: this.handleBarClick,
-            type: "bar",
+            type: "column",
             name: "Maximum",
             showInLegend: "true",
 			yValueFormatString: "$#,##0",
@@ -58,7 +58,7 @@ class MajorChartBuffalo extends Component {
 		},
 		{
 			click: this.handleBarClick,
-            type: "bar",
+            type: "column",
             name: "Average",
             showInLegend: "true",
 			yValueFormatString: "$#,##0",
@@ -68,7 +68,7 @@ class MajorChartBuffalo extends Component {
         },
 		{
 			click: this.handleBarClick,
-            type: "bar",
+            type: "column",
             name: "Minimum",
             showInLegend: "true",
 			yValueFormatString: "$#,##0",

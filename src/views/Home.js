@@ -33,6 +33,14 @@ class Home extends React.Component {
             case "University at Buffalo":
                 this.redirect("/ub")
                 break;
+            
+            case "Stony Brook":
+                this.redirect("/stonybrook")
+                break;
+
+            case "Binghamton":
+                this.redirect("/binghamton")
+                break;
 
             case "Albany":
                 this.redirect("/albany")
@@ -55,7 +63,13 @@ class Home extends React.Component {
       <div className={classes.root}>
         <div>
             <SchoolCharts itemClicked={this.handleItemClicked}/>
-            <Route path="/" exact specific render={() => <Slide in={true} direction="right" timeout={1000}><h4 style={{color: "#727272"}}>Select a bar in the chart above for information by position.</h4></Slide>}/>
+            <Route path="/" exact specific render={() => 
+                <Slide in={true} direction="right" timeout={1000}>
+                    <h4 style={{color: "#727272"}}>
+                        <i class="far fa-lightbulb"></i> Select a bar in the chart above for information by position
+                    </h4>
+                </Slide>}
+            />
             <Route path="/ub" exact render={() => <MajorChartBuffalo itemClicked={this.handleItemClicked}/>}/>
             <Route path="/albany" render={() => <MajorChartAlbany itemClicked={this.handleItemClicked}/>}/>
             <Route path="/binghamton" render={() => <MajorChartBinghamton itemClicked={this.handleItemClicked}/>}/>

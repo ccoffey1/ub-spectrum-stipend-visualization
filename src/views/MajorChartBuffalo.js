@@ -49,7 +49,7 @@ class MajorChartBuffalo extends Component {
         {
             // TODO: Update these just incase!
 			click: this.handleBarClick,
-            type: "bar",
+            type: "column",
             name: "Maximum",
             showInLegend: "true",
 			yValueFormatString: "$#,##0",
@@ -173,7 +173,7 @@ class MajorChartBuffalo extends Component {
 		},
 		{
 			click: this.handleBarClick,
-            type: "bar",
+            type: "column",
             name: "Average",
             showInLegend: "true",
 			yValueFormatString: "$#,##0",
@@ -297,7 +297,7 @@ class MajorChartBuffalo extends Component {
         },
 		{
 			click: this.handleBarClick,
-            type: "bar",
+            type: "column",
             name: "Minimum",
             showInLegend: "true",
 			yValueFormatString: "$#,##0",
@@ -430,7 +430,11 @@ class MajorChartBuffalo extends Component {
                     />
                 </Paper>
             </Grow>
-            <Slide in={true} id="bottomboi" direction="right" timeout={1000}><h4 style={{color: "#727272"}}>Click and drag to zoom.</h4></Slide>
+            <Slide in={true} id="bottomboi" direction="right" timeout={1000}>
+                <h4 style={{color: "#727272"}}>
+                    <i class="far fa-lightbulb"></i> Click and drag to zoom
+                </h4>
+            </Slide>
         </div>
 	);
   }
