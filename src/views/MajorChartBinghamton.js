@@ -50,7 +50,6 @@ class MajorChartBinghamton extends Component {
 				<Paper style={{padding: 20}}>
 					<CanvasJSChart options = {options} />
 				</Paper>
-				{/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
 			</Grow>
 		</div>
 	);

@@ -14,6 +14,7 @@ import MajorChartAlbany from './MajorChartAlbany';
 import MajorChartBinghamton from './MajorChartBinghamton';
 import MajorChartStonyBrook from './MajorChartStonyBrook';
 import { Slide } from '@material-ui/core';
+import scrollToComponent from 'react-scroll-to-component';
 
 
 const styles = ({
