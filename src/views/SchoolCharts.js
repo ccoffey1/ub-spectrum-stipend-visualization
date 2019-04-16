@@ -28,7 +28,7 @@ class SchoolCharts extends Component {
 		axisY: {
 			includeZero: false,
 			prefix: "$",
-			title: "Salary"
+			title: "Annual Salary"
 		},
 		data: [{
 			click: this.handleBarClick,

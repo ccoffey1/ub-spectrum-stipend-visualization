@@ -40,7 +40,7 @@ class MajorChartAlbany extends Component {
 		axisY: {
 			includeZero: false,
 			prefix: "$",
-			title: "Salary",
+			title: "Annual Salary",
 			stripLines: [{
 				value: 23088,
 				label: "NYS Minimum Wage ($23,088)",
