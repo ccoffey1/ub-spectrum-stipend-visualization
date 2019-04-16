@@ -1,5 +1,6 @@
 {
   "name": "ub-spectrum-stipend-visualization",
+  "homepage": "http://webdev.cse.buffalo.edu/cse410/undici/stipend-data-visualization",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
