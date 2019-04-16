@@ -15,7 +15,7 @@ class MajorChartAlbany extends Component {
     componentDidMount() {
          const bottom = document.getElementById("bottomboi")
          scrollToComponent(bottom, {
-            offset: 1000,
+            offset: 65,
             align: 'bottom',
             duration: 800
         });
@@ -40,7 +40,15 @@ class MajorChartAlbany extends Component {
 		axisY: {
 			includeZero: false,
 			prefix: "$",
-			title: "Salary"
+			title: "Salary",
+			stripLines: [{
+				value: 23088,
+				label: "NYS Minimum Wage ($23,088)",
+				labelAlign: "near",
+				labelBackgroundColor: 'black',
+				showOnTop: 'true',
+				color: 'red'
+			}],
         },
         toolTip: {
             shared: true
@@ -276,7 +284,14 @@ class MajorChartAlbany extends Component {
                 <h4 style={{color: "#727272"}}>
                     <i class="far fa-lightbulb"></i> Click and drag to zoom
                 </h4>
-            </Slide>        
+            </Slide>
+            <Slide in={true} direction="right" timeout={1000}>
+				<h4>
+                    <a href="https://goodcalculators.com/us-minimum-wage-calculator/new-york/" rel="noopener noreferrer" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> NYS Minimum Wage Information
+                    </a>
+                </h4>
+			</Slide>     
 		</div>
 	);
   }
