@@ -13,12 +13,23 @@ import MajorChartBuffalo from './MajorChartBuffalo';
 import MajorChartAlbany from './MajorChartAlbany';
 import MajorChartBinghamton from './MajorChartBinghamton';
 import MajorChartStonyBrook from './MajorChartStonyBrook';
-import { Slide, AppBar, Toolbar } from '@material-ui/core';
+import { Slide, AppBar, Toolbar, Fab, Popover, Typography } from '@material-ui/core';
 
 
-const styles = ({
+const styles = (theme) => ({
     root: {
+        height: "100vp",
+        width: "100vp",
         padding: 50
+    },
+    info: {
+        position: "fixed",
+        right: "3%",
+        bottom: "3%",
+        color: "white"
+    },
+    infoContent: {
+        margin: theme.spacing.unit * 2
     }
 })
 
@@ -26,6 +37,10 @@ class Home extends React.Component {
     constructor(props) {
         super(props)
         this.redirect = this.redirect.bind(this)
+    }
+
+    state = {
+        anchorEl: null
     }
 
     handleItemClicked = itemInfo => {
@@ -51,13 +66,27 @@ class Home extends React.Component {
         }
     }
     
+    handleInfoClicked = e => {
+        this.setState({ 
+            anchorEl: e.currentTarget
+        })
+    }
+
+    handleInfoClose = () => {
+        this.setState({ 
+            anchorEl: null 
+        })
+    }
+
     redirect = (site) => {
         this.props.history.push(site)
         this.setState({ redirect: false })
     }
 
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
+    const { anchorEl } = this.state
+    const open = Boolean(anchorEl)
 
     return (
       <div className={classes.root}>
@@ -75,6 +104,38 @@ class Home extends React.Component {
             <Route path="/binghamton" render={() => <MajorChartBinghamton itemClicked={this.handleItemClicked}/>}/>
             <Route path="/stonybrook" render={() => <MajorChartStonyBrook itemClicked={this.handleItemClicked}/>}/>
         </div>
+        <Fab 
+            className={classes.info} 
+            color="secondary" 
+            size="small" 
+            onClick={this.handleInfoClicked}>
+            <i class="fas fa-info"></i>
+        </Fab>
+        <Popover 
+            className={classes.infoContent}
+            open={open}
+            anchorEl={anchorEl}
+            onClick={this.handleInfoClose}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+              transformOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+            }}
+            >
+            <Typography className={classes.infoContent}>
+                <b style={{color: "gray"}}>By Christian Coffey</b>
+                <br/>
+                <a 
+                    href="https://github.com/ccoffey1/ub-spectrum-stipend-visualization"
+                    rel="noopener noreferrer"
+                    target="_blank">
+                    <i class="fas fa-external-link-alt"></i> View on Github
+                </a>
+            </Typography>
+        </Popover>
       </div>
     )
   }

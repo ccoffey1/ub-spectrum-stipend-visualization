@@ -4,15 +4,15 @@ import Home from './views/Home';
 import {
   BrowserRouter,
 } from "react-router-dom";
+import { blue, amber } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      main: '#343a40'
-    },
-    secondary: {
-      main: '#eeeeee'
-    }
+    primary: blue,
+    secondary: amber
+  },
+  typography: {
+    useNextVariants: true,
   }
 })
 
